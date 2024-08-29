@@ -1,3 +1,5 @@
 <template>
-  <div>template-admin</div>
+  <el-config-provider>
+    <router-view />
+  </el-config-provider>
 </template>
