@@ -9,6 +9,13 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "@where_is_mr_li/style/dist/mixin.scss";',
+      },
+    },
+  },
   plugins: [
     vue(),
     AutoImport({
