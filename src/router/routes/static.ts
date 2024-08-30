@@ -8,4 +8,11 @@ export const staticRoutes: Array<RouteRecordRaw> = [
       title: '登录',
     },
   },
+  {
+    path: '/dashboard',
+    component: () => import('@/views/dashboard/IndexView.vue'),
+    meta: {
+      title: '首页',
+    },
+  },
 ];

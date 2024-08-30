@@ -7,7 +7,7 @@ interface DataForm {
   code: string;
 }
 
-export function accountViewForm() {
+export function formHook() {
   const dataFormRef = ref<FormInstance>();
 
   const dataForm: Ref<DataForm> = ref({

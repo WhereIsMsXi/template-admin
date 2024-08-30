@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 
-export function accountViewLoading() {
+export function loadingHook() {
   const loadingCtrl = ref({
     login: false,
   });

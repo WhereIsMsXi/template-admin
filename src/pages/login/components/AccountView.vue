@@ -3,13 +3,18 @@ import { ref } from 'vue';
 import { useUserStore } from '@/store/user';
 import type { FormInstance } from 'element-plus';
 
-import { accountViewLoading } from './accountViewLoading';
-import { accountViewForm } from './accountViewForm';
+import { loadingHook } from './account/loadingHook';
+import { formHook } from './account/formHook';
+import { routerHook } from './account/routerHook';
 
-const { loadingCtrl, openLoginLoading, closeLoginLoading } =
-  accountViewLoading();
+// loading
+const { loadingCtrl, openLoginLoading, closeLoginLoading } = loadingHook();
 
-const { dataFormRef, dataFormRules, dataForm } = accountViewForm();
+// form
+const { dataFormRef, dataFormRules, dataForm } = formHook();
+
+// router
+const { goHome } = routerHook();
 
 const isShowPassword = ref(false);
 
@@ -24,6 +29,7 @@ function handleLogin(formEl: FormInstance | undefined) {
     if (valid) {
       await loginByUsername(dataForm.value);
       closeLoginLoading();
+      goHome();
       return;
     }
     closeLoginLoading();
