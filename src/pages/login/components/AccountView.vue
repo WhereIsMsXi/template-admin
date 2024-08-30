@@ -1,63 +1,19 @@
 <script setup lang="ts">
-import { ref, type Ref } from 'vue';
+import { ref } from 'vue';
 import { useUserStore } from '@/store/user';
-import type { FormInstance, FormRules } from 'element-plus';
+import type { FormInstance } from 'element-plus';
 
-const { loginByUsername } = useUserStore();
+import { accountViewLoading } from './accountViewLoading';
+import { accountViewForm } from './accountViewForm';
 
-const dataFormRef = ref<FormInstance>();
-export interface DataForm {
-  username: string;
-  password: string;
-  code: string;
-}
+const { loadingCtrl, openLoginLoading, closeLoginLoading } =
+  accountViewLoading();
 
-const dataForm: Ref<DataForm> = ref({
-  username: 'admin',
-  password: '123456',
-  code: '1234',
-});
+const { dataFormRef, dataFormRules, dataForm } = accountViewForm();
 
 const isShowPassword = ref(false);
-const loadingCtrl = ref({
-  login: false,
-});
-function openLoginLoading() {
-  loadingCtrl.value.login = true;
-}
-function closeLoginLoading() {
-  loadingCtrl.value.login = false;
-}
 
-const dataFormRules: Ref<FormRules<DataForm>> = ref({
-  username: [
-    { required: true, message: 'Please input username', trigger: 'blur' },
-    {
-      min: 3,
-      max: 5,
-      message: 'Length should be 3 to 5',
-      trigger: 'blur',
-    },
-  ],
-  password: [
-    { required: true, message: 'Please input password', trigger: 'blur' },
-    {
-      min: 6,
-      max: 12,
-      message: 'Length should be 6 to 12',
-      trigger: 'blur',
-    },
-  ],
-  code: [
-    { required: true, message: 'Please input code', trigger: 'blur' },
-    {
-      min: 4,
-      max: 4,
-      message: 'Length should be 4',
-      trigger: 'blur',
-    },
-  ],
-});
+const { loginByUsername } = useUserStore();
 function handleLogin(formEl: FormInstance | undefined) {
   openLoginLoading();
   if (!formEl) {
@@ -162,15 +118,6 @@ function handleLogin(formEl: FormInstance | undefined) {
 <style scoped lang="scss">
 .login-account {
   margin-top: 20px;
-  // @for $i from 1 through 4 {
-  // 	.login-animation#{$i} {
-  // 		// opacity: 0;
-  // 		// animation-name: error-num;
-  // 		animation-duration: 0.5s;
-  // 		animation-fill-mode: forwards;
-  // 		animation-delay: calc($i/10) + s;
-  // 	}
-  // }
   &__label {
     width: 100%;
     height: 24px;
