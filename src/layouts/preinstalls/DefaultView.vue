@@ -1,15 +1,28 @@
 <template>
   <el-container class="layout-container" style="height: 100%">
-    <router-view v-slot="{ Component }">
-      <transition mode="out-in">
-        <keep-alive>
-          <component :is="Component" />
-        </keep-alive>
-      </transition>
-    </router-view>
+    <aside-view />
   </el-container>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import AsideView from '../components/AsideView.vue';
+</script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.layout-container {
+  ::v-deep(.el-aside) {
+    height: 100%;
+    background-color: #545c64;
+    .el-menu {
+      border-right: none;
+    }
+  }
+  .flex-col {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+}
+</style>

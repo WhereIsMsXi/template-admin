@@ -1,22 +1,13 @@
 import type { RouteRecordRaw } from 'vue-router';
+import { RootRoute } from '../share';
 
 export const staticRoutes: Array<RouteRecordRaw> = [
+  RootRoute,
   {
     path: '/login',
     component: () => import('@/pages/login/LoginView.vue'),
     meta: {
       title: '登录',
-    },
-  },
-  {
-    path: '/',
-    redirect: '/dashboard',
-  },
-  {
-    path: '/dashboard',
-    component: () => import('@/views/dashboard/IndexView.vue'),
-    meta: {
-      title: '首页',
     },
   },
   {

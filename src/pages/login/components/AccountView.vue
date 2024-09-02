@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useUserStore } from '@/store/user';
 import type { FormInstance } from 'element-plus';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '@/store/user';
 
 import { loadingHook } from './account/loadingHook';
 import { formHook } from './account/formHook';
 import { routerHook } from './account/routerHook';
+import { initRoute } from '@/router/route';
+
+const router = useRouter();
 
 // loading
 const { loadingCtrl, openLoginLoading, closeLoginLoading } = loadingHook();
@@ -28,6 +32,8 @@ function handleLogin(formEl: FormInstance | undefined) {
   formEl.validate(async (valid) => {
     if (valid) {
       await loginByUsername(dataForm.value);
+
+      initRoute(router);
       closeLoginLoading();
       goHome();
       return;
