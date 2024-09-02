@@ -42,7 +42,7 @@
     "@vue/tsconfig": "^0.5.0",
     "@where_is_mr_li/storage": "^0.0.8",
     "@where_is_mr_li/style": "^0.0.5",
-    "@where_is_mr_li/utils": "^0.0.7",
+    "@where_is_mr_li/utils": "^0.0.8",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "cz-customizable": "^7.0.0",

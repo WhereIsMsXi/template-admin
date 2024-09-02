@@ -10,7 +10,7 @@ export const dynamicRoute: RouteRecordRaw[] = [];
 
 Object.keys(modules).forEach((key) => {
   const content = (modules as any)[key].default;
-  const routes = mustArray(content);
+  const routes: RouteRecordRaw[] = mustArray(content);
 
   dynamicRoute.push(...routes);
 });

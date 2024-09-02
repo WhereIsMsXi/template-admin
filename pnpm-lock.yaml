@@ -71,8 +71,8 @@ devDependencies:
     specifier: ^0.0.5
     version: 0.0.5
   '@where_is_mr_li/utils':
-    specifier: ^0.0.7
-    version: 0.0.7
+    specifier: ^0.0.8
+    version: 0.0.8
   commitizen:
     specifier: ^4.3.0
     version: 4.3.0(typescript@5.3.3)
@@ -1510,8 +1510,8 @@ packages:
     engines: {node: '>=12.0.0'}
     dev: true
 
-  /@where_is_mr_li/utils@0.0.7:
-    resolution: {integrity: sha512-OzVOUpJH4UFOn0ZMl/AGLVQXLaAdeoxiP4H9Ll+v0K/kpLt0yM9XOva0A/ZsBGc1Ba2nfdOlyTqw1AHLZ+4fGw==}
+  /@where_is_mr_li/utils@0.0.8:
+    resolution: {integrity: sha512-5kS1Gmof+wSM31VGUroUciDtnmxJDxwu8q2aceg5+zovP78+hIaW0sdWZohF4POpPo32rkHbZ7Dd7IISMOBtiw==}
     dev: true
 
   /JSONStream@1.3.5:

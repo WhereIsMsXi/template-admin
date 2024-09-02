@@ -1,9 +1,11 @@
 import type { RouteRecordRaw } from 'vue-router';
 import { RoleEnum } from '@/store/enums/role';
+import { LayoutIndexView } from '../share';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/layout',
+    component: LayoutIndexView,
     meta: {
       title: `111`,
       roles: [RoleEnum.boss, RoleEnum.assistant, RoleEnum.staff],
