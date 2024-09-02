@@ -1,4 +1,5 @@
 import { useUserStore } from '@/store/user';
+import { useDynamicRouteStore } from '@/store/dynamicRoute';
 import _ from 'lodash';
 import { dynamicRoute } from './routes/dynamic';
 import type { RouteRecordRaw } from 'vue-router';
@@ -22,6 +23,21 @@ function filterRoutesByRole(routes: RouteRecordRaw[], role: number) {
   });
   return result;
 }
+
+function filterRoutesByActiveMenu(routes: RouteRecordRaw[]): any {
+  const result: RouteRecordRaw[] = [];
+  routes.forEach((route) => {
+    if (!route.meta?.activeMenu) {
+      if (route.children && route.children.length > 0) {
+        route.children = filterRoutesByActiveMenu(route.children);
+      }
+      result.push(route);
+    }
+  });
+
+  return result;
+}
+
 export function initRoute(router: any) {
   function addDynamicRoute() {
     userRoutes.forEach((route: any) => {
@@ -33,10 +49,21 @@ export function initRoute(router: any) {
     const { role } = userStore.user;
     return filterRoutesByRole(routes, role);
   }
+  function getFilterRoutes() {
+    const routes = _.cloneDeep(userRoutes);
+    return filterRoutesByActiveMenu(routes);
+  }
 
+  const dynamicRouteStore = useDynamicRouteStore();
   const userStore = useUserStore();
   if (!userStore.token) return;
 
   const userRoutes = getUserDynamicRoutes();
   addDynamicRoute();
+  dynamicRouteStore.SET_ROUTES(userRoutes);
+
+  const filterRoutes = getFilterRoutes();
+
+  const userMenus = dynamicRouteStore.getMenus(_.cloneDeep(filterRoutes));
+  dynamicRouteStore.SET_MENUS(userMenus);
 }
