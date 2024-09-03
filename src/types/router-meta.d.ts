@@ -8,6 +8,9 @@ declare module 'vue-router' {
     roles?: RoleEnum[];
     icon?: string;
     keepAlive?: boolean;
+
+    activeMenu?: string;
+    hide?: boolean;
   }
 }
 

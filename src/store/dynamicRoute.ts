@@ -1,7 +1,7 @@
 import { session } from '@where_is_mr_li/storage';
 import { defineStore } from 'pinia';
 import type { DynamicRouteState } from './types';
-import { MENUS, ROUTES, TABS } from './constants';
+import { MENUS, ROUTES, AUTHTABS } from './constants';
 import type { RouteRecordRaw } from 'vue-router';
 
 function isRoot(route: RouteRecordRaw) {
@@ -17,7 +17,7 @@ export const useDynamicRouteStore = defineStore('dynamicRoute', {
   state: (): DynamicRouteState => ({
     routes: session.get(ROUTES) || [],
     menus: session.get(MENUS) || [],
-    tabs: session.get(TABS) || [],
+    authTabs: session.get(AUTHTABS) || [],
   }),
   actions: {
     SET_ROUTES(data: RouteRecordRaw[]) {
@@ -28,9 +28,9 @@ export const useDynamicRouteStore = defineStore('dynamicRoute', {
       this.menus = data;
       session.set(MENUS, data);
     },
-    SET_TABS(data: Array<any>) {
-      this.tabs = data;
-      session.set(TABS, data);
+    SET_AUTHTABS(data: Array<any>) {
+      this.authTabs = data;
+      session.set(AUTHTABS, data);
     },
     CLEAR() {
       this.routes = [];
@@ -39,8 +39,8 @@ export const useDynamicRouteStore = defineStore('dynamicRoute', {
       this.menus = [];
       session.del(MENUS);
 
-      this.tabs = [];
-      session.del(TABS);
+      this.authTabs = [];
+      session.del(AUTHTABS);
     },
     getMenus(routes: RouteRecordRaw[]) {
       function getRootItem(rotue: any) {

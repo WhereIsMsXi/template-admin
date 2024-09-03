@@ -67,6 +67,6 @@ export function initRoute(router: any) {
   dynamicRouteStore.SET_MENUS(userMenus);
 
   const menus = dynamicRouteStore.getMenus(_.cloneDeep(userRoutes));
-  const tabs = dynamicRouteStore.getAuthTabs(_.cloneDeep(menus));
-  dynamicRouteStore.SET_TABS(tabs);
+  const authTabs = dynamicRouteStore.getAuthTabs(_.cloneDeep(menus));
+  dynamicRouteStore.SET_AUTHTABS(authTabs);
 }
