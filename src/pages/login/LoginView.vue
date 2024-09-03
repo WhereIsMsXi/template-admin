@@ -54,15 +54,13 @@ const activeName = ref('account');
     margin: 0 auto;
   }
   &__title {
-    color: #303133;
-    font-weight: 500;
-    font-size: 22px;
-    text-align: center;
-    letter-spacing: 4px;
+    @include font-init(22px, #303133, 500, 1);
     margin: 15px 0 30px;
     white-space: nowrap;
-    z-index: 5;
+    text-align: center;
+    letter-spacing: 4px;
     position: relative;
+    z-index: 5;
     transition: all 0.3s ease;
   }
 }

@@ -76,27 +76,21 @@ function goHome() {
   top: 50%;
   transform: translate(-50%, -50%);
   &__title {
-    text-align: center;
-    font-size: 240px;
-    font-weight: 700;
-    color: #2d8cf0;
+    @include font-init(240px, #2d8cf0, 700, 260px);
     height: 260px;
-    line-height: 260px;
     margin-top: 40px;
+    text-align: center;
     span {
+      @include font-init(230px, #19be6b, 700, 260px);
       display: inline-block;
-      color: #19be6b;
-      font-size: 230px;
       animation: erroranimation 3s ease 0s infinite alternate;
     }
   }
   &__message {
+    @include font-init(30px, #dddde2, 500, 1);
     display: block;
     text-align: center;
-    font-size: 30px;
-    font-weight: 500;
     letter-spacing: 12px;
-    color: #dddde2;
   }
   &__btn {
     text-align: center;

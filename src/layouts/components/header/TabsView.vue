@@ -101,30 +101,24 @@ function tabClose(route: RouteRecordRaw) {
 .tabs {
   border-bottom: 1px solid #f1f1f1;
   &__content {
+    @include flex-row(flex-start, flex-end);
+    @include font-init(12px, #606266, 400, 1);
     height: 34px;
-    display: flex;
-    align-items: flex-end;
     padding: 0 10px;
-    font-size: 12px;
-    color: #606266;
-    white-space: nowrap;
     margin: 0;
+    white-space: nowrap;
     list-style: none;
   }
   &__item {
+    @include flex-row(space-between, center);
+    height: 26px;
+
     padding: 0 5px;
+    margin: 0 -15px;
     border-width: 15px 27px 15px;
     border-style: solid;
     border-color: transparent;
-    margin: 0 -15px;
-
-    height: 26px;
     line-height: 26px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
     cursor: pointer;
     &:hover {
       background-color: #ebf5ff;

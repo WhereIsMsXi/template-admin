@@ -131,20 +131,15 @@ function handleLogin(formEl: FormInstance | undefined) {
 .login-account {
   margin-top: 20px;
   &__label {
+    @include flex-row(flex-start, center);
     width: 100%;
     height: 24px;
     margin-bottom: 5px;
     padding: 0 12px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
   }
   &__txt {
+    @include font-init(14px, #333, 600, 24px);
     margin-left: 10px;
-    font-size: 14px;
-    line-height: 24px;
-    color: #333;
-    font-weight: 600;
   }
   &__content {
     width: 100%;

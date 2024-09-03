@@ -9,19 +9,16 @@
 </template>
 <style scoped lang="scss">
 .logo {
+  @include flex-row(center, center);
   width: 100%;
   height: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   &__img {
     width: 30px;
     height: 30px;
     border-radius: 5px;
   }
   &__txt {
-    font-size: 18px;
-    color: #fff;
+    @include font-init(18px, #fff, 400, 1);
     margin-left: 8px;
   }
 }
