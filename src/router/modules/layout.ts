@@ -22,6 +22,16 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
+        path: 'body-detail',
+        component: () => import('@/views/layout/BodyDetail.vue'),
+        meta: {
+          title: `bodyDetail`,
+          roles: [RoleEnum.boss, RoleEnum.assistant],
+          icon: 'Watermelon',
+          activeMenu: '/layout/body',
+        },
+      },
+      {
         path: 'header-body',
         component: () => import('@/views/layout/HeaderBody.vue'),
         meta: {
