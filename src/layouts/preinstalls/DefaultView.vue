@@ -23,7 +23,7 @@ import MainView from '../components/MainView.vue';
     }
   }
   .flex-col {
-    @include flex-column(flex-start, center);
+    @include flex-column(flex-start, space-between);
     width: 100%;
     height: 100%;
     overflow: hidden;

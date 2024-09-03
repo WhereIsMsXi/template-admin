@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: 'body',
-        component: () => import('@/views/layout/BodyView.vue'),
+        component: () => import('@/views/layout/body/BodyView.vue'),
         meta: {
           title: `body`,
           roles: [RoleEnum.boss, RoleEnum.assistant],
@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'body-detail',
-        component: () => import('@/views/layout/BodyDetail.vue'),
+        component: () => import('@/views/layout/body/BodyDetail.vue'),
         meta: {
           title: `bodyDetail`,
           roles: [RoleEnum.boss, RoleEnum.assistant],
@@ -33,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'header-body',
-        component: () => import('@/views/layout/HeaderBody.vue'),
+        component: () => import('@/views/layout/header-body/HeaderBody.vue'),
         meta: {
           title: `headerBody`,
           roles: [RoleEnum.boss],
@@ -42,7 +42,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'join-class',
-        component: () => import('@/views/layout/JoinClass.vue'),
+        component: () => import('@/views/layout/join-class/JoinClass.vue'),
         meta: {
           title: `joinClass`,
           roles: [RoleEnum.boss],
