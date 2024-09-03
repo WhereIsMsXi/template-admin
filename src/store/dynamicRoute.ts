@@ -1,7 +1,7 @@
 import { session } from '@where_is_mr_li/storage';
 import { defineStore } from 'pinia';
 import type { DynamicRouteState } from './types';
-import { MENUS, ROUTES } from './constants';
+import { MENUS, ROUTES, TABS } from './constants';
 import type { RouteRecordRaw } from 'vue-router';
 
 function isRoot(route: RouteRecordRaw) {
@@ -17,6 +17,7 @@ export const useDynamicRouteStore = defineStore('dynamicRoute', {
   state: (): DynamicRouteState => ({
     routes: session.get(ROUTES) || [],
     menus: session.get(MENUS) || [],
+    tabs: session.get(TABS) || [],
   }),
   actions: {
     SET_ROUTES(data: RouteRecordRaw[]) {
@@ -27,12 +28,19 @@ export const useDynamicRouteStore = defineStore('dynamicRoute', {
       this.menus = data;
       session.set(MENUS, data);
     },
+    SET_TABS(data: Array<any>) {
+      this.tabs = data;
+      session.set(TABS, data);
+    },
     CLEAR() {
       this.routes = [];
       session.del(ROUTES);
 
       this.menus = [];
       session.del(MENUS);
+
+      this.tabs = [];
+      session.del(TABS);
     },
     getMenus(routes: RouteRecordRaw[]) {
       function getRootItem(rotue: any) {
@@ -55,6 +63,17 @@ export const useDynamicRouteStore = defineStore('dynamicRoute', {
         } else if (isSubMenu(route)) {
           const item = getSubMenuItem(route);
           result.push(item);
+        }
+      });
+      return result;
+    },
+    getAuthTabs(routes: RouteRecordRaw[]) {
+      const result: RouteRecordRaw[] = [];
+      routes.forEach((route) => {
+        if (isRoot(route)) {
+          result.push(route);
+        } else if (isSubMenu(route)) {
+          result.push(...(route.children as RouteRecordRaw[]));
         }
       });
       return result;

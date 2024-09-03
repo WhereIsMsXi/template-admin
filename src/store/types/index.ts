@@ -16,4 +16,5 @@ export interface User {
 export interface DynamicRouteState {
   routes: RouteRecordRaw[];
   menus: RouteRecordRaw[];
+  tabs: RouteRecordRaw[];
 }

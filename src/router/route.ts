@@ -49,7 +49,7 @@ export function initRoute(router: any) {
     const { role } = userStore.user;
     return filterRoutesByRole(routes, role);
   }
-  function getFilterRoutes() {
+  function getUserMenuRoutes() {
     const routes = _.cloneDeep(userRoutes);
     return filterRoutesByActiveMenu(routes);
   }
@@ -62,8 +62,11 @@ export function initRoute(router: any) {
   addDynamicRoute();
   dynamicRouteStore.SET_ROUTES(userRoutes);
 
-  const filterRoutes = getFilterRoutes();
-
-  const userMenus = dynamicRouteStore.getMenus(_.cloneDeep(filterRoutes));
+  const menuRoutes = getUserMenuRoutes();
+  const userMenus = dynamicRouteStore.getMenus(_.cloneDeep(menuRoutes));
   dynamicRouteStore.SET_MENUS(userMenus);
+
+  const menus = dynamicRouteStore.getMenus(_.cloneDeep(userRoutes));
+  const tabs = dynamicRouteStore.getAuthTabs(_.cloneDeep(menus));
+  dynamicRouteStore.SET_TABS(tabs);
 }
