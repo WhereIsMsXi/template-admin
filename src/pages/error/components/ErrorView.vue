@@ -1,11 +1,21 @@
 <script setup lang="ts">
-import { back, goHome } from '@/utils/helper';
+import { useRouter } from 'vue-router';
+
 const $props = defineProps({
   info: {
     type: String,
     default: '401',
   },
 });
+const router = useRouter();
+
+function back() {
+  router.back();
+}
+
+function goHome() {
+  router.push({ path: '/' });
+}
 </script>
 <template>
   <div class="error">

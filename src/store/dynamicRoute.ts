@@ -30,6 +30,9 @@ export const useDynamicRouteStore = defineStore('dynamicRoute', {
     CLEAR() {
       this.routes = [];
       session.del(ROUTES);
+
+      this.menus = [];
+      session.del(MENUS);
     },
     getMenus(routes: RouteRecordRaw[]) {
       function getRootItem(rotue: any) {
