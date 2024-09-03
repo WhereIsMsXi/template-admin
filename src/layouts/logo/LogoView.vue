@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import MongooseJpg from '@/assets/mongoose.jpg';
+// import MongooseJpg from '@/assets/mongoose.jpg';
 </script>
 <template>
   <div class="logo">
-    <img class="logo__img" :src="MongooseJpg" />
+    <!-- <img class="logo__img" :src="MongooseJpg" /> -->
     <span class="logo__txt">TemplateAdmin</span>
   </div>
 </template>
