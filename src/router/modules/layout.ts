@@ -22,6 +22,7 @@ const routes: Array<RouteRecordRaw> = [
           title: `${prefixRouter}.body`,
           roles: [RoleEnum.boss, RoleEnum.assistant],
           icon: 'Watermelon',
+          keepAlive: true,
         },
       },
       {

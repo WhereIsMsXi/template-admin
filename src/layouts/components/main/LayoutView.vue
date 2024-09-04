@@ -1,18 +1,23 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRoute } from 'vue-router';
+const route = useRoute();
+</script>
 <template>
-  <div class="h100">
+  <div id="h100">
     <router-view v-slot="{ Component }">
       <transition mode="out-in">
-        <keep-alive>
+        <keep-alive v-if="route.meta.keepAlive">
           <component :is="Component" />
         </keep-alive>
+        <component v-else :is="Component"></component>
       </transition>
     </router-view>
   </div>
 </template>
 <style scoped lang="scss">
-.h100 {
+#h100 {
   height: 100%;
-  background-color: #fff;
+  overflow: auto;
+  border-radius: 15px;
 }
 </style>
