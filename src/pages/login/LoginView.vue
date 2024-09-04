@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import BgLoginJpeg from './images/bg-login.jpeg';
 import AccountView from './components/AccountView.vue';
+import { I18nModulEnum } from '@/i18n/consts';
 
 const activeName = ref('account');
 </script>
@@ -10,10 +11,13 @@ const activeName = ref('account');
     <!-- <img class="login__image" :src="BgLoginJpeg" alt="" /> -->
     <div class="login__main--wrapper">
       <div class="login__main">
-        <h2 class="login__title">后台模板</h2>
+        <h2 class="login__title">{{ $t(`${I18nModulEnum.login}.name`) }}</h2>
         <div>
           <el-tabs v-model="activeName">
-            <el-tab-pane label="账号登陆" name="account">
+            <el-tab-pane
+              :label="$t(`${I18nModulEnum.login}.title`)"
+              name="account"
+            >
               <account-view />
             </el-tab-pane>
           </el-tabs>

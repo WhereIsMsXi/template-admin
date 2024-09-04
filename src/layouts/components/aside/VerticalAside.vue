@@ -27,7 +27,7 @@ const route = useRoute();
           <el-icon>
             <component :is="item.meta.icon"></component>
           </el-icon>
-          <span>{{ item.meta.title }}</span>
+          <span>{{ $t(item.meta.title) }}</span>
         </template>
       </el-menu-item>
       <el-sub-menu v-else :index="item.path">
@@ -35,7 +35,7 @@ const route = useRoute();
           <el-icon>
             <component :is="item.meta.icon"></component>
           </el-icon>
-          <span>{{ item.meta.title }}</span>
+          <span>{{ $t(item.meta.title) }}</span>
         </template>
         <sub-menu :children="item.children" />
       </el-sub-menu>

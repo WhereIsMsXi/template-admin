@@ -1,13 +1,16 @@
 import type { RouteRecordRaw } from 'vue-router';
 import { RoleEnum } from '@/store/enums/role';
 import { LayoutIndexView } from '../share';
+import { I18nModulEnum } from '@/i18n/consts';
+
+const prefixRouter = `${I18nModulEnum.router}.layout`;
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/layout',
     component: LayoutIndexView,
     meta: {
-      title: `111`,
+      title: `${prefixRouter}.index`,
       roles: [RoleEnum.boss, RoleEnum.assistant, RoleEnum.staff],
       icon: 'CopyDocument',
     },
@@ -16,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
         path: 'body',
         component: () => import('@/views/layout/body/BodyView.vue'),
         meta: {
-          title: `body`,
+          title: `${prefixRouter}.body`,
           roles: [RoleEnum.boss, RoleEnum.assistant],
           icon: 'Watermelon',
         },
@@ -25,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
         path: 'body-detail',
         component: () => import('@/views/layout/body/BodyDetail.vue'),
         meta: {
-          title: `bodyDetail`,
+          title: `${prefixRouter}.bodyDetail`,
           roles: [RoleEnum.boss, RoleEnum.assistant],
           icon: 'Watermelon',
           activeMenu: '/layout/body',
@@ -35,7 +38,7 @@ const routes: Array<RouteRecordRaw> = [
         path: 'header-body',
         component: () => import('@/views/layout/header-body/HeaderBody.vue'),
         meta: {
-          title: `headerBody`,
+          title: `${prefixRouter}.headerBody`,
           roles: [RoleEnum.boss],
           icon: 'Watermelon',
         },
@@ -44,7 +47,7 @@ const routes: Array<RouteRecordRaw> = [
         path: 'join-class',
         component: () => import('@/views/layout/join-class/JoinClass.vue'),
         meta: {
-          title: `joinClass`,
+          title: `${prefixRouter}.joinClass`,
           roles: [RoleEnum.boss],
           icon: 'Watermelon',
         },

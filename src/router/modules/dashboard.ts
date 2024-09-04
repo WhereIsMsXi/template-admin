@@ -1,6 +1,9 @@
 import type { RouteRecordRaw } from 'vue-router';
 import { RoleEnum } from '@/store/enums/role';
 import { LayoutIndexView } from '../share';
+import { I18nModulEnum } from '@/i18n/consts';
+
+const prefixRouter = `${I18nModulEnum.router}.dashboard`;
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '',
         component: () => import('@/views/dashboard/IndexView.vue'),
         meta: {
-          title: `index`,
+          title: `${prefixRouter}.index`,
           roles: [RoleEnum.boss, RoleEnum.assistant, RoleEnum.staff],
         },
       },

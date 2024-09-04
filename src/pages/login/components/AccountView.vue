@@ -8,6 +8,7 @@ import { loadingHook } from './account/loadingHook';
 import { formHook } from './account/formHook';
 import { routerHook } from './account/routerHook';
 import { initRoute } from '@/router/route';
+import { I18nModulEnum } from '@/i18n/consts';
 
 const router = useRouter();
 
@@ -55,12 +56,14 @@ function handleLogin(formEl: FormInstance | undefined) {
         <el-icon size="18" color="#999999">
           <User />
         </el-icon>
-        <div class="login-account__txt">账号</div>
+        <div class="login-account__txt">
+          {{ $t(`${I18nModulEnum.login}.account`) }}
+        </div>
       </div>
       <div class="login-account__content">
         <el-input
           type="text"
-          placeholder="请输入账号"
+          :placeholder="`${I18nModulEnum.login}.accountPlaceholder`"
           v-model="dataForm.username"
           clearable
           autocomplete="off"
@@ -72,12 +75,14 @@ function handleLogin(formEl: FormInstance | undefined) {
         <el-icon size="18" color="#999999">
           <Unlock />
         </el-icon>
-        <div class="login-account__txt">密码</div>
+        <div class="login-account__txt">
+          {{ $t(`${I18nModulEnum.login}.password`) }}
+        </div>
       </div>
       <div class="login-account__content">
         <el-input
           :type="isShowPassword ? 'text' : 'password'"
-          placeholder="请输入密码"
+          :placeholder="$t(`${I18nModulEnum.login}.passwordPlaceholder`)"
           v-model="dataForm.password"
           autocomplete="off"
         >
@@ -95,14 +100,16 @@ function handleLogin(formEl: FormInstance | undefined) {
         <el-icon size="18" color="#999999">
           <Message />
         </el-icon>
-        <div class="login-account__txt">验证码</div>
+        <div class="login-account__txt">
+          {{ $t(`${I18nModulEnum.login}.captcha`) }}
+        </div>
       </div>
       <el-col :span="15">
         <div class="login-account__content">
           <el-input
             type="text"
             maxlength="4"
-            placeholder="请输入验证码"
+            :placeholder="$t(`${I18nModulEnum.login}.captchaPlaceholder`)"
             v-model="dataForm.code"
             clearable
             autocomplete="off"
@@ -122,7 +129,7 @@ function handleLogin(formEl: FormInstance | undefined) {
         @click="handleLogin(dataFormRef)"
         :loading="loadingCtrl.login"
       >
-        <span>登陆</span>
+        <span>{{ $t(`${I18nModulEnum.login}.login`) }}</span>
       </el-button>
     </el-form-item>
   </el-form>

@@ -1,36 +1,62 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { I18nModulEnum } from '@/i18n/consts';
+import { storeToRefs } from 'pinia';
+import { getCurrentInstance, onMounted, ref } from 'vue';
+import { useSystemConfigStore } from '@/store/systemConfig';
+
+const { proxy } = getCurrentInstance() as any;
+const prefixHeader = I18nModulEnum.header;
+const { systemConfig } = storeToRefs(useSystemConfigStore());
 
 const notices = ref([
   {
     name: '入库',
     key: 'entry',
     number: 1,
+    i18nText: '',
   },
   {
     name: '要货',
     key: 'demand',
     number: 1,
+    i18nText: '',
   },
   {
     name: '盘点',
     key: 'check',
     number: 1,
+    i18nText: '',
   },
   {
     name: '包损',
     key: 'breakage',
     number: 1,
+    i18nText: '',
   },
   {
     name: '退货',
     key: 'back',
     number: 1,
+    i18nText: '',
   },
 ]);
 function handleClick() {
   notices.value = [];
 }
+onMounted(() => {
+  function getEnI18nText(item: any) {
+    return `${proxy.$t(`${str}.part1`)} ${item.number} ${proxy.$t(
+      `${str}.${item.key}`,
+    )}${proxy.$t(`${str}.part2`)}${proxy.$t(`${str}.part3`)}`;
+  }
+  const str = `${prefixHeader}.notice`;
+  notices.value.forEach((item) => {
+    item.i18nText =
+      systemConfig.value.i18n === 'en'
+        ? getEnI18nText(item)
+        : proxy.$t(`${str}.notice`);
+  });
+});
 </script>
 <template>
   <div class="header">

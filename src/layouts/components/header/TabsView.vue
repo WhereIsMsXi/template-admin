@@ -43,17 +43,14 @@ function updateTabs(newVal: string) {
   );
   if (currentAuthTab) {
     const { hide, activeMenu } = currentAuthTab.meta as any;
-    if (!currentTab.value && !hide && !activeMenu) {
+    const currentTab = store.tabs.find((i: any) => i.path === route.path);
+    if (!currentTab && !hide && !activeMenu) {
       store.ADD_TAB(newVal);
     }
     return;
   }
   router.push('/404');
 }
-
-const currentTab = computed(() =>
-  store.tabs.find((i: any) => i.path === route.path),
-);
 
 watch(
   () => route.path,
@@ -67,8 +64,9 @@ function tabClick(route: any) {
 }
 function tabClose(route: RouteRecordRaw) {
   const index = store.DEL_TAB(route.path);
+  const currentTab = store.tabs.find((i: any) => i.path === route.path);
   // 关闭当前 tabs
-  if (route.path === currentTab.value.path) {
+  if (route.path === currentTab.path) {
     const prevTab = store.getPrevTab(index);
     router.push(prevTab.path);
   }
@@ -85,7 +83,7 @@ function tabClose(route: RouteRecordRaw) {
           :class="{ 'is-active': isActive(item) }"
           @click="tabClick(item)"
         >
-          <span>{{ item.meta.title }}</span>
+          <span>{{ $t(item.meta.title) }}</span>
           <el-icon
             v-if="!item.meta.isAffix"
             size="15"

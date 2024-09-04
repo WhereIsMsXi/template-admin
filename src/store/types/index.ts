@@ -18,3 +18,11 @@ export interface DynamicRouteState {
   menus: RouteRecordRaw[];
   authTabs: RouteRecordRaw[];
 }
+
+// systemConfig
+export interface SystemConfig {
+  i18n: string;
+}
+export interface SystemConfigState {
+  systemConfig: SystemConfig;
+}

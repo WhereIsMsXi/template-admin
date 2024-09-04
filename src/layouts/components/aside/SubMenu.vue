@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<Props>(), {
         <Watermelon v-if="item.meta.icon === 'Watermelon'" />
       </el-icon>
       <span>
-        {{ item.meta.title }}
+        {{ $t(item.meta.title) }}
       </span>
     </el-menu-item>
   </template>

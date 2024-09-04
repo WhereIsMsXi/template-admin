@@ -1,42 +1,88 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { getCurrentInstance, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { ElMessage } from 'element-plus';
 import screenfull from 'screenfull';
 
-import { useDynamicRouteStore } from '@/store/dynamicRoute';
-import { useUserStore } from '@/store/user';
 import NoticeList from './components/NoticeList.vue';
-import { ElMessage } from 'element-plus';
+
+import { useUserStore } from '@/store/user';
+import { useDynamicRouteStore } from '@/store/dynamicRoute';
+import { useTabsStore } from '@/store/tabs';
+import { useSystemConfigStore } from '@/store/systemConfig';
 
 import MongooseJpg from '@/assets/mongoose.jpg';
+import { I18nModulEnum } from '@/i18n/consts';
 
+const userStore = useUserStore();
+const tabsStore = useTabsStore();
 const dynamicRouteStore = useDynamicRouteStore();
-const userInfoSotre = useUserStore();
+const systemConfigStore = useSystemConfigStore();
 
 const router = useRouter();
+
+const { systemConfig } = storeToRefs(systemConfigStore);
+function handleCommandLang(command: string) {
+  if (systemConfig.value.i18n !== command) {
+    systemConfig.value.i18n = command;
+    systemConfigStore.SET_SYSTEMCONFIG(systemConfig.value);
+  }
+}
 const isFullscreen = ref(false);
 
+const prefixHeader = I18nModulEnum.header;
+const { proxy } = getCurrentInstance() as any;
 function toggleFullScreen() {
   if (!screenfull.isEnabled) {
-    ElMessage.warning('当前浏览器不支持全屏');
+    ElMessage.warning(proxy.$t(`${prefixHeader}.fullscreen.support`));
     return;
   }
   screenfull.toggle();
   isFullscreen.value = !isFullscreen.value;
 }
 
-function handleCommand(command: string) {
-  router.push(command);
+function handleCommandConfig(command: string) {
+  if (typeof command === 'string') router.push(command);
 }
 
 function logOut() {
+  tabsStore.CLEAR();
   dynamicRouteStore.CLEAR();
-  userInfoSotre.CLEAR();
+  userStore.CLEAR();
   router.push('/login');
 }
 </script>
 <template>
   <div class="header-user-and-extend">
+    <div class="header-user-and-extend__item">
+      <el-dropdown
+        :show-timeout="70"
+        :hide-timeout="50"
+        trigger="click"
+        @command="handleCommandLang"
+      >
+        <i :title="$t(prefixHeader + '.notice.lang')">
+          <el-icon class="header-user-and-extend__icon" size="16"
+            ><House
+          /></el-icon>
+        </i>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item
+              command="zh-cn"
+              :disabled="systemConfig.i18n === 'zh-cn'"
+              >简体中文</el-dropdown-item
+            >
+            <el-dropdown-item
+              command="en"
+              :disabled="systemConfig.i18n === 'en'"
+              >English</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
     <div class="header-user-and-extend__item">
       <el-popover
         placement="bottom"
@@ -46,7 +92,7 @@ function logOut() {
         :persistent="false"
       >
         <template #reference>
-          <i class="aligin-center" :title="'.notice.title'">
+          <i class="aligin-center" :title="$t(prefixHeader + '.notice.title')">
             <el-badge :is-dot="true">
               <el-icon><Bell /></el-icon>
             </el-badge>
@@ -58,13 +104,23 @@ function logOut() {
       </el-popover>
     </div>
     <div class="header-user-and-extend__item">
-      <i :title="isFullscreen ? '.fullscreen.cancel' : '.fullscreen.confirm'">
+      <i
+        :title="
+          isFullscreen
+            ? $t(prefixHeader + '.fullscreen.cancel')
+            : $t(prefixHeader + '.fullscreen.confirm')
+        "
+      >
         <el-icon class="header-user-and-extend__icon" size="16">
           <FullScreen @click="toggleFullScreen" />
         </el-icon>
       </i>
     </div>
-    <el-dropdown @command="handleCommand" :show-timeout="70" :hide-timeout="50">
+    <el-dropdown
+      @command="handleCommandConfig"
+      :show-timeout="70"
+      :hide-timeout="50"
+    >
       <span class="header-user-and-extend__item">
         <img :src="MongooseJpg" class="header-user-and-extend__img" />
         <span class="header-user-and-extend__txt">SXT</span>
@@ -74,12 +130,20 @@ function logOut() {
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="/dashboard">首页 </el-dropdown-item>
-          <el-dropdown-item command="/401">401</el-dropdown-item>
-          <el-dropdown-item command="/403">403</el-dropdown-item>
-          <el-dropdown-item command="/404">404</el-dropdown-item>
+          <el-dropdown-item command="/dashboard">
+            {{ $t(prefixHeader + '.userDropdown.homepage') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="/401">
+            {{ $t(prefixHeader + '.userDropdown.401') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="/403">
+            {{ $t(prefixHeader + '.userDropdown.403') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="/404">
+            {{ $t(prefixHeader + '.userDropdown.404') }}
+          </el-dropdown-item>
           <el-dropdown-item divided @click="logOut">
-            退出登陆
+            {{ $t(prefixHeader + '.userDropdown.logout') }}
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>

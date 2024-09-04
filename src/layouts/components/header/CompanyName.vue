@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <div class="content">template-admin</div>
+  <div class="content">company name</div>
 </template>
 <style scoped lang="scss">
 .content {
