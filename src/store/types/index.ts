@@ -25,4 +25,5 @@ export interface SystemConfig {
 }
 export interface SystemConfigState {
   systemConfig: SystemConfig;
+  isCollapse: boolean;
 }

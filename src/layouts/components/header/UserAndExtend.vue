@@ -156,7 +156,7 @@ function logOut() {
   &__item {
     @include flex-row(flex-start, center);
     height: 100%;
-    padding: 0 10px;
+    padding: 0 8px;
     color: #606060;
     cursor: pointer;
     &:hover {
@@ -167,6 +167,9 @@ function logOut() {
     }
     ::v-deep(.el-badge) {
       @include flex-row(flex-start, center);
+    }
+    &:last-child {
+      padding-right: 0;
     }
   }
   &__img {

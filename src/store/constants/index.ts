@@ -8,3 +8,4 @@ export const AUTH_TABS = 'auth-tabs';
 export const TABS = 'tabs';
 
 export const SYSTEM_CONFIG = 'system-config';
+export const IS_COLLAPSE = 'is-collapse';
