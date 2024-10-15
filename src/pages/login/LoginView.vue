@@ -44,7 +44,7 @@ const activeName = ref('account');
     left: 0;
   }
   &__main--wrapper {
-    width: 28%;
+    width: 500px;
     margin-right: 11%;
     padding: 20px;
     background-color: #ffffff;
@@ -66,6 +66,21 @@ const activeName = ref('account');
     position: relative;
     z-index: 5;
     transition: all 0.3s ease;
+  }
+}
+
+// 处理移动端样式
+@media screen and (max-width: 620px) {
+  .login {
+    .login__main--wrapper {
+      width: 100% !important;
+      height: 100% !important;
+      padding: 20px 0 !important;
+      border-radius: 0 !important;
+      box-shadow: unset !important;
+      border: none !important;
+      margin-right: 0;
+    }
   }
 }
 </style>
